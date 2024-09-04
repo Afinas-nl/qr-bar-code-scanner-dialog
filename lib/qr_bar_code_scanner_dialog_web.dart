@@ -126,7 +126,7 @@ class QrBarCodeScannerDialogWeb extends QrBarCodeScannerDialogPlatform {
             modal.style.display = "block";
             html5QrcodeScanner.render((decodedText, decodedResult) => {
                 console.log(`Code scanned = ${decodedText}`, decodedResult);
-                message(`Code scanned = ${decodedText}`);
+                message(`${decodedText}`);
                 html5QrcodeScanner.clear();
                 modal.style.display = "none";
             });
