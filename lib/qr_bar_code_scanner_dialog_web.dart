@@ -154,8 +154,12 @@ class QrBarCodeScannerDialogWeb extends QrBarCodeScannerDialogPlatform {
   }
 
   @override
-  void scanBarOrQrCode(
-      {BuildContext? context, required Function(String?) onScanSuccess}) {
+  void scanBarOrQrCode({
+    BuildContext? context,
+    required Function(String?) onScanSuccess,
+    Widget Function(BuildContext context, Widget scannerWidget)? builder,
+  }) {
+    assert(builder == null, "builder is not supported on web platform");
     js.context.callMethod("scanCode", [onScanSuccess]);
   }
 }

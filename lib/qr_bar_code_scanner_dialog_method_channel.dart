@@ -22,11 +22,24 @@ class MethodChannelQrBarCodeScannerDialog
   }
 
   @override
-  void scanBarOrQrCode(
-      {BuildContext? context, required Function(String? code) onScanSuccess}) {
+  void scanBarOrQrCode({
+    BuildContext? context,
+    required Function(String? code) onScanSuccess,
+    Widget Function(BuildContext context, Widget scannerWidget)? builder,
+  }) {
     /// context is required to show alert in non-web platforms
     assert(context != null);
 
+    if (builder != null) {
+      showDialog(
+        context: context!,
+        builder: (context) => ScannerWidget(
+          onScanSuccess: onScanSuccess,
+          builder: builder,
+        ),
+      );
+      return;
+    }
     showDialog(
         context: context!,
         builder: (context) => Container(
@@ -40,12 +53,14 @@ class MethodChannelQrBarCodeScannerDialog
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: ScannerWidget(onScanSuccess: (code) {
-                  if (code != null) {
-                    Navigator.pop(context);
-                    onScanSuccess(code);
-                  }
-                }),
+                child: ScannerWidget(
+                  onScanSuccess: (code) {
+                    if (code != null) {
+                      Navigator.pop(context);
+                      onScanSuccess(code);
+                    }
+                  },
+                ),
               ),
             ));
   }
