@@ -53,8 +53,9 @@ class MethodChannelQrBarCodeScannerDialog
 
 class ScannerWidget extends StatefulWidget {
   final void Function(String? code) onScanSuccess;
+  final Widget Function(BuildContext context, Widget scannerWidget)? builder;
 
-  const ScannerWidget({super.key, required this.onScanSuccess});
+  const ScannerWidget({super.key, required this.onScanSuccess, this.builder});
 
   @override
   createState() => _ScannerWidgetState();
@@ -85,6 +86,9 @@ class _ScannerWidgetState extends State<ScannerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.builder != null) {
+      return widget.builder!(context, _buildQrView(context));
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
