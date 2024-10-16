@@ -13,7 +13,9 @@ class MockQrBarCodeScannerDialogPlatform
 
   @override
   void scanBarOrQrCode(
-      {BuildContext? context, required Function(String? p1) onScanSuccess}) {
+      {BuildContext? context,
+      required Function(String? p1) onScanSuccess,
+      Widget Function(BuildContext p1, Widget p2)? builder}) {
     onScanSuccess("CODE");
   }
 }

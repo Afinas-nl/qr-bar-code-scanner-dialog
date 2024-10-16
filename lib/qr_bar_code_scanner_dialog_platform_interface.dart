@@ -29,8 +29,11 @@ abstract class QrBarCodeScannerDialogPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  void scanBarOrQrCode(
-      {BuildContext? context, required Function(String?) onScanSuccess}) {
+  void scanBarOrQrCode({
+    BuildContext? context,
+    required Function(String?) onScanSuccess,
+    Widget Function(BuildContext context, Widget scannerWidget)? builder,
+  }) {
     throw UnimplementedError('scanBarOrQrCodeWeb() has not been implemented.');
   }
 }
